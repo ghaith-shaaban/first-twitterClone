@@ -27,7 +27,7 @@
                 <small class="fs-6 fw-light text-muted"> {{$comment['created_at']->diffforhumans()}}</small>
             </div>
             <p class="fs-6 mt-3 fw-light">
-               {{$comment['com']}}
+               {{$comment['content']}}
             </p>
         </div>
 
