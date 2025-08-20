@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\idea;
-class maincontroller extends Controller
+class Maincontroller extends Controller
 {
     public function follow(user $user){
         $follower=auth()->user();
@@ -24,10 +24,6 @@ class maincontroller extends Controller
 
     public function index(){
 
-        // $idea =new idea([ "idea" =>"test ghaith12","likes" =>62]);
-
-        // $idea->save();
-
         $ideas=idea::with('user:id,name,image','comments.user:id,name,image')->withCount('likes')->orderBy('created_at','DESC');
         if(request()->has('search'))
         {
@@ -38,16 +34,11 @@ class maincontroller extends Controller
 
     }
 
-    public function like(idea $idea){
+    public function toggleLike(idea $idea){
         $liked_user=auth()->user();
-        $liked_user->likes()->attach($idea['id']);
-        // $idea->likes()->attach(auth()->id());
-        return redirect()->route('idea show',$idea['id'])->with('success','liked successfully!');
+        $liked_user->likes()->toggle($idea->id);
+
+        return redirect()->route('idea show',$idea->id)->with('success','liked successfully!');
     }
 
-  public function unlike(idea $idea){
-    $liked_user=auth()->user();
-    $liked_user->likes()->detach($idea['id']);
-    return redirect()->route('idea show',$idea['id'])->with('success','liked successfully!');
-    }
 }

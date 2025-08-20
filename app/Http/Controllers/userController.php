@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class userController extends Controller
+class UserController extends Controller
 {
 
     public function show(User $user)
@@ -31,12 +31,10 @@ class userController extends Controller
     {
         $this->authorize('update',$user);
         $validated = $request->validated();
-        // ()->validate([
-        //      'name'=>'required|min:2','image'=>'image','bio'=>'nullable|min:2|max:255'
-        // ]);
+
 
         if($request['image']){
-            // $imagepath = request('image')->store();
+
             $imagepath = $request->file('image')-> store('profile','public');
             $validated['image']=$imagepath;
             if($user['image']!=null){

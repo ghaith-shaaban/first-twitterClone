@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\mail;
 
-class authController extends Controller
+class AuthController extends Controller
 {
     public function register(){
 
@@ -20,15 +20,13 @@ class authController extends Controller
             [
               'name'=>'required|min:3|max:30',
               'email'=>'required|email|unique:users,email',
-              'password'=>'required|confirmed|min:2'
+              'password'=>'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'
             ]
         );
 
         $user=User::create(['name'=>$validated['name'],
                'email'=>$validated['email'],
                'password'=>Hash::make($validated['password']) ]);
-
-        // Mail::to($user['email'])->send(new welcomeEmail($user));
 
          return redirect()->route('main')->with('success','account created successfully!');
     }
@@ -51,7 +49,6 @@ class authController extends Controller
             return redirect()->route('main')->with('success','login successfully!');
         }
         else
-        //  return redirect()->route('login')->withErrors(['email'=>'no such email']);
      return redirect()->route('login')->withErrors(['email'=>'no such email']);
     }
 

@@ -49,19 +49,15 @@
             <div class="d-flex justify-content-between">
                 <div>
                     @auth
-                        @if ($idea->liked(auth()->user()))
-                        <form method="post" action="{{route('idea.unlike',$idea['id'])}}">
+                        <form method="post" action="{{route('idea.toggle.like',$idea['id'])}}">
                             @csrf
-                        <button class="fw-light nav-link fs-6"> <span class="far fa-heart me-1">
+                            @if ($idea->liked(auth()->user()))
+                                <button class="fw-light nav-link fs-6"> <span class="far fa-heart me-1">
+                            @else
+                                <button class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
+                            @endif
                             </span> {{$idea->likes_count}}</button>
                         </form>
-                        @else
-                        <form method="post" action="{{route('idea.like',$idea['id'])}}">
-                            @csrf
-                        <button class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
-                            </span> {{$idea->likes_count}}</button>
-                        </form>
-                        @endif
                         @endauth
 
                         @guest

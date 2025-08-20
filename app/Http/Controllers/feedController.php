@@ -6,7 +6,7 @@ use App\Models\idea;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class feedController extends Controller
+class FeedController extends Controller
 {
     /**
      * Handle the incoming request.

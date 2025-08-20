@@ -8,12 +8,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
-class adminController extends Controller
+class AdminController extends Controller
 {
   public function index(){
-    // if(!Gate::allows('admin')){
-    //     abort(403);
-    // }
     $totalusers=User::count();
     $totalideas=idea::count();
     $totalcomments=comment::count();
