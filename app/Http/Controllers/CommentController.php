@@ -18,7 +18,7 @@ class CommentController extends Controller
             $comment->content=request()->get('comment');
             $comment->save();
 
-            return redirect()->route('idea show',$idea['id'])->with('success','comment posted successfully!');
+            return redirect()->route('idea.show',$idea['id'])->with('success','comment posted successfully!');
         }
         catch(Exception $e)
         {return back()->withErrors(['error'=>'failed to post comment']); }

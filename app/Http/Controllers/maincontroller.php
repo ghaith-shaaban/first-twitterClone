@@ -38,7 +38,7 @@ class Maincontroller extends Controller
         $liked_user=auth()->user();
         $liked_user->likes()->toggle($idea->id);
 
-        return redirect()->route('idea show',$idea->id)->with('success','liked successfully!');
+        return redirect()->route('idea.show',$idea->id)->with('success','liked successfully!');
     }
 
 }

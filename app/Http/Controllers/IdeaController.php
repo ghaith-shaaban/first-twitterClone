@@ -45,7 +45,7 @@ class IdeaController extends Controller
         request()->validate(['cont'=>'required|min:2|max:240']);
         $id->idea= request()->get('cont','');
         $id->save();
-        return redirect()->route('idea show',$id['id'])->with('success','Idea updated successfully');
+        return redirect()->route('idea.show',$id['id'])->with('success','Idea updated successfully');
     }
 
 }
