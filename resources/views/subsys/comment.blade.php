@@ -1,6 +1,6 @@
 <div>
     <div class="mb-3">
-        <form method="POST" action={{route('idea comment store',$idea['id'])}}>
+        <form method="POST" action={{route('idea.comment.store',$idea['id'])}}>
             @csrf
         <textarea name="comment" class="fs-6 form-control" rows="1"></textarea>
         @error('comment')

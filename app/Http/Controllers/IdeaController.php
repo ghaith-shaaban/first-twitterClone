@@ -16,7 +16,7 @@ class IdeaController extends Controller
             'idea'=>$validated['idea'],
             'user_id'=>auth()->id()
         ]);
-       return redirect()->route('main')->with('success','Idea created Successfully');
+       return redirect()->route('main')->with('success','Idea created successfully');
     }
 
     public function destroy(idea $id){
@@ -24,7 +24,7 @@ class IdeaController extends Controller
         $this->authorize('delete',$id);
 
         $id->delete();
-        return redirect()->route('main')->with('success','Idea deleted Successfully');
+        return redirect()->route('main')->with('success','Idea deleted successfully');
     }
 
     public function show(idea $id){
@@ -45,7 +45,7 @@ class IdeaController extends Controller
         request()->validate(['cont'=>'required|min:2|max:240']);
         $id->idea= request()->get('cont','');
         $id->save();
-        return redirect()->route('idea show',$id['id'])->with('success','Idea updated Successfully');
+        return redirect()->route('idea show',$id['id'])->with('success','Idea updated successfully');
     }
 
 }

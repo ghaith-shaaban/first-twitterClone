@@ -15,9 +15,9 @@
 
                     @can('update',$idea)
                          @if (!$editing)
-                           <a href={{route('idea edit',$idea['id'])}}>edit</a>
+                           <a href={{route('idea.edit',$idea['id'])}}>edit</a>
                          @endif
-                    <form method="post" action={{route('idea destroy',$idea['id'])}}>
+                    <form method="post" action={{route('idea.destroy',$idea['id'])}}>
                         @csrf
                         @method('delete')
                     <button>x</button>
@@ -30,7 +30,7 @@
         <div class="card-body">
 
             @if ($editing)
-            <form action={{route('idea update',$idea['id'])}} method="post">
+            <form action={{route('idea.update',$idea['id'])}} method="post">
                 @csrf
                 @method('put')
             <textarea name="cont" class="form-control" id="idea" rows="3">{{$idea['idea']}}</textarea>

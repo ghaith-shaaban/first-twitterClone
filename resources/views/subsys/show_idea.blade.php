@@ -14,11 +14,11 @@
                         </div>
                     </div>
                     <div>
-                        <a href={{route('idea show',$idea['id'])}}>view</a>
+                        <a href={{route('idea.show',$idea['id'])}}>view</a>
 
                         @can('update',$idea)
-                        <a href={{route('idea edit',$idea['id'])}}>edit</a>
-                        <form method="post" action={{route('idea destroy',$idea['id'])}}>
+                        <a href={{route('idea.edit',$idea['id'])}}>edit</a>
+                        <form method="post" action={{route('idea.destroy',$idea['id'])}}>
                             @csrf
                             @method('delete')
                         <button>x</button>

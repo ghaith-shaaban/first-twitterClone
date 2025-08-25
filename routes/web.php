@@ -73,7 +73,7 @@ Route::resource('/user',UserController::class)->only('edit','update')->middlewar
 
 Route::post('/submit',[IdeaController::class,'sub'] )-> name('submit');
 
-Route::group(['prefix'=>'idea/','as'=>'idea ','middleware'=>['auth']],function () {
+Route::group(['prefix'=>'idea/','as'=>'idea.','middleware'=>['auth']],function () {
 
     Route::delete('/{id}',[IdeaController::class,'destroy'] )-> name('destroy');
 
@@ -83,7 +83,7 @@ Route::group(['prefix'=>'idea/','as'=>'idea ','middleware'=>['auth']],function (
 
     Route::put('/{id}',[IdeaController::class,'update'] )-> name('update');
 
-    Route::post('/{idea}/comment',[CommentController::class,'store'] )-> name('comment store');
+    Route::post('/{idea}/comment',[CommentController::class,'store'] )-> name('comment.store');
 
 });
 

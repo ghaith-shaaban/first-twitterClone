@@ -27,8 +27,8 @@
                     <td><a href="{{route('user.show',$idea['user_id'])}}">{{$idea->user['name']}}</a></td>
                     <td>{{$idea['created_at']->toDatestring()}}</td>
                     <td>
-                        <a href="{{route('idea show',$idea['id'])}}">view</a>
-                        <a href="{{route('idea edit',$idea['id'])}}">edit</a>
+                        <a href="{{route('idea.show',$idea['id'])}}">view</a>
+                        <a href="{{route('idea.edit',$idea['id'])}}">edit</a>
                     </td>
                     </tr>
                     @endforeach

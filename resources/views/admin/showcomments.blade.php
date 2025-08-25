@@ -24,13 +24,13 @@
                 @foreach ($allcomments as $comment )
                 <tr>
                     <td>{{$comment['id']}}</td>
-                    <td>{{$comment['com']}}</td>
-                    <td><a href="{{route('idea show',$comment['idea_id'])}}">{{$comment['idea_id']}}</a></td>
+                    <td>{{$comment['content']}}</td>
+                    <td><a href="{{route('idea.show',$comment['idea_id'])}}">{{$comment['idea_id']}}</a></td>
                     <td><a href="{{route('user.show',$comment['user_id'])}}">{{$comment->user['name']}}</a></td>
                     <td>{{$comment['created_at']->toDatestring()}}</td>
                     <td>
-                        {{-- <a href="{{route('idea show',$comment['id'])}}">view</a>
-                        <a href="{{route('idea edit',$comment['id'])}}">edit</a> --}}
+                        {{-- <a href="{{route('idea.show',$comment['id'])}}">view</a>
+                        <a href="{{route('idea.edit',$comment['id'])}}">edit</a> --}}
                         <form action="{{route('admin.comment.destroy',$comment['id'])}}" method="post">
                             @csrf
                             @method('delete')
