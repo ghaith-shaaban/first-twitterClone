@@ -8,7 +8,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is('profile')? 'text-white bg-primary rounded':''}}" href="{{route('profile')}}">
-                        <span>Explore</span></a>
+                        <span>profile</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is('feed')? 'text-white bg-primary rounded':''}}" href="{{route('feed')}}">
