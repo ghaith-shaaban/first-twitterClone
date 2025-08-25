@@ -21,6 +21,6 @@ class CommentController extends Controller
             return redirect()->route('idea.show',$idea['id'])->with('success','comment posted successfully!');
         }
         catch(Exception $e)
-        {return back()->withErrors(['error'=>'failed to post comment']); }
+        {return back()->withErrors(['comment'=>'failed to post comment']); }
     }
 }
