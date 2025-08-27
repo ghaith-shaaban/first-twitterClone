@@ -9,43 +9,45 @@ use Illuminate\Http\Request;
 class IdeaController extends Controller
 {
 
-    public function sub(createIdeaRequest $request){
-       $validated= $request->validated();
+    public function create(createIdeaRequest $request){
+
+        $validated= $request->validated();
 
         idea::create([
             'idea'=>$validated['idea'],
             'user_id'=>auth()->id()
         ]);
+
        return redirect()->route('main')->with('success','Idea created successfully');
     }
 
-    public function destroy(idea $id){
+    public function destroy(idea $idea){
 
-        $this->authorize('delete',$id);
+        $this->authorize('delete',$idea);
 
-        $id->delete();
+        $idea->delete();
         return redirect()->route('main')->with('success','Idea deleted successfully');
     }
 
-    public function show(idea $id){
+    public function show(idea $idea){
 
-        return view('show_one',['idea'=>$id,'editing'=>false]);
+        return view('show_one',['idea'=>$idea,'editing'=>false]);
     }
 
-    public function edit(idea $id){
+    public function edit(idea $idea){
 
-        $this->authorize('update',$id);
+        $this->authorize('update',$idea);
         $editing=true;
-        return view('show_one',['idea'=>$id,'editing'=>$editing]);
+        return view('show_one',['idea'=>$idea,'editing'=>$editing]);
     }
 
-    public function update(idea $id){
+    public function update(idea $idea){
 
-        $this->authorize('update',$id);
+        $this->authorize('update',$idea);
         request()->validate(['cont'=>'required|min:2|max:240']);
-        $id->idea= request()->get('cont','');
-        $id->save();
-        return redirect()->route('idea.show',$id['id'])->with('success','Idea updated successfully');
+        $idea->idea= request()->get('cont','');
+        $idea->save();
+        return redirect()->route('idea.show',$idea['id'])->with('success','Idea updated successfully');
     }
 
 }

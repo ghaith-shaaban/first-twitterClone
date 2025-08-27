@@ -1,15 +1,29 @@
 
 @extends('style.hf')
 
-@section('title','show one')
+@section('title','main')
 
 @section('contant')
 
         <div class="row">
-            @include('subsys.side_list')
-            @include('subsys.message')
-            @include('subsys.show_one')
-            @include('subsys.search')
+
+            <div class="col-3">
+                @include('subsys.side_list')
+            </div>
+
+            <div class="col-6">
+                @include('subsys.message')
+                @include('subsys.add_idea')
+
+                @include('subsys.ideaCard')
+
+            </div>
+
+            <div class="col-3">
+                @include('subsys.search')
+                @include('subsys.topUsers')
+            </div>
         </div>
+
 
 @endsection
