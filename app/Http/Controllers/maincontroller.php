@@ -25,6 +25,7 @@ class Maincontroller extends Controller
     public function index(){
 
         $ideas=idea::with('user:id,name,image','comments.user:id,name,image')->withCount('likes')->orderBy('created_at','DESC');
+        
         if(request()->has('search'))
         {
             $ideas=$ideas->search(request('search'));

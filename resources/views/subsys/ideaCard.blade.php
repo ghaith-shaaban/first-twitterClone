@@ -1,6 +1,3 @@
-
-    <hr>
-    @forelse ($ideas as $idea)
     <div class="mt-3">
         <div class="card">
             <div class="px-3 pt-4 pb-2">
@@ -21,7 +18,7 @@
                         <form method="post" action={{route('idea.destroy',$idea['id'])}}>
                             @csrf
                             @method('delete')
-                        <button>x</button>
+                        <button>delete</button>
                         </form>
                         @endcan
 
@@ -29,9 +26,25 @@
                 </div>
             </div>
             <div class="card-body">
-                <p class="fs-6 fw-light text-muted">
-                   {{$idea['idea']}}
-                </p>
+                @isset($editing)
+                    @if ($editing)
+                        <form action={{route('idea.update',$idea['id'])}} method="post">
+                            @csrf
+                            @method('put')
+                            <textarea name="cont" class="form-control" id="idea" rows="3">{{$idea['idea']}}</textarea>
+                            @error('cont')
+                                {{$message}}
+                            @enderror
+                            <div class="">
+                                <button class="btn btn-dark"> update </button>
+                            </div>
+                        </form>
+                    @else
+                        <p class="fs-6 fw-light text-muted">
+                            {{$idea['idea']}}
+                        </p>
+                    @endif
+                @endisset
                 <div class="d-flex justify-content-between">
                     <div>
                         @auth
@@ -44,8 +57,6 @@
                             @endif
                             </span> {{$idea->likes_count}}</button>
                         </form>
-
-
                         @endauth
 
                         @guest
@@ -62,8 +73,3 @@
             </div>
         </div>
     </div>
-    @empty
-    no results found!
-    @endforelse
-    {{$ideas->withQueryString()->links()}}
-</div>

@@ -7,10 +7,29 @@
 @section('contant')
 
         <div class="row">
-            @include('subsys.side_list')
-            @include('subsys.message')
-            @include('user.show')
-            @include('subsys.search')
+
+            <div class="col-3">
+                @include('subsys.side_list')
+            </div>
+
+
+
+            <div class="col-6">
+                @include('subsys.message')
+                @include('subsys.showUser')
+                @forelse ($ideas as $idea)
+                    @include('subsys.ideaCard')
+                @empty
+                    no results found!
+                @endforelse
+                {{$ideas->withQueryString()->links()}}
+            </div>
+
+            <div class="col-3">
+                @include('subsys.search')
+                @include('subsys.topUsers')
+            </div>
+
         </div>
 
 @endsection

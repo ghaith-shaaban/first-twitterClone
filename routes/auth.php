@@ -1,16 +1,19 @@
 <?php
 
-use App\Http\Controllers\authController;
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
-Route::get('/register',[authController::class,'register'])->name('register');
+Route::group(['middleware'=>'guest'],function(){
+Route::get('/register',[AuthController::class,'register'])->name('register');
 
-Route::post('/register',[authController::class,'store']);
+Route::post('/register',[AuthController::class,'store']);
 
-Route::get('/login',[authController::class,'login'])->name('login');
+Route::get('/login',[AuthController::class,'login'])->name('login');
 
-Route::post('/login',[authController::class,'auth']);
+Route::post('/login',[AuthController::class,'auth']);
 
-Route::get('/logout',[authController::class,'logout'])->name('logout');
+});
+
+Route::get('/logout',[AuthController::class,'logout'])->middleware('auth')->name('logout');
 
 ?>
