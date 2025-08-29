@@ -22,7 +22,7 @@ class commentPolicy
      */
     public function update(User $user, comment $comment)
     {
-        //
+       return ($user['id'] === $comment['user_id']);
     }
 
     /**

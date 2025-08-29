@@ -13,7 +13,6 @@
 
             <div class="col-6">
                 @include('subsys.message')
-                @include('subsys.add_idea')
 
                 @include('subsys.ideaCard')
 

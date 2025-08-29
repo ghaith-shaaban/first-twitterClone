@@ -31,14 +31,13 @@ class IdeaController extends Controller
 
     public function show(idea $idea){
 
-        return view('show_one',['idea'=>$idea,'editing'=>false]);
+        return view('show_one',compact('idea'));
     }
 
     public function edit(idea $idea){
 
         $this->authorize('update',$idea);
-        $editing=true;
-        return view('show_one',['idea'=>$idea,'editing'=>$editing]);
+        return view('show_one',compact('idea'));
     }
 
     public function update(idea $idea){

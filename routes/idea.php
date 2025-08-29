@@ -18,6 +18,4 @@ Route::group(['prefix'=>'idea/','as'=>'idea.','middleware'=>['auth']],function (
 
     Route::put('/{idea}',[IdeaController::class,'update'] )-> name('update');
 
-    Route::post('/{idea}/comment',[CommentController::class,'store'] )-> name('comment.store');
-
 });
