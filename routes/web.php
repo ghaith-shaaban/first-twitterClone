@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\NotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,8 @@ Route::post('/user/{user}/unfollow',[MainController::class,'unfollow'])->middlew
 Route::post('/idea/{idea}/toggle-like',[MainController::class,'toggleLike'])->middleware('auth')->name('idea.toggle.like');
 
 Route::get('/feed',FeedController::class )->middleware('auth')-> name('feed');
+
+Route::get('/notification',NotificationController::class )->middleware('auth')-> name('notification');
 
 Route::get('/profile',[UserController::class,'profile'])->middleware('auth')->name('profile');
 

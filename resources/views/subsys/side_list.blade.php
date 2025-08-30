@@ -14,6 +14,10 @@
                     <a class="nav-link {{Route::is('feed')? 'text-white bg-primary rounded':''}}" href="{{route('feed')}}">
                         <span>Feed</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{Route::is('notification')? 'text-white bg-primary rounded':''}}" href="{{route('notification')}}">
+                        <span>notification</span></a>
+                </li>
             </ul>
         </div>
         <div class="card-footer text-center py-2">
