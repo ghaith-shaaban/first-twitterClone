@@ -11,14 +11,17 @@
                         </div>
                     </div>
                     <div>
+                        @if(!(Route::is('idea.show')))
                         <a href={{route('idea.show',$idea['id'])}}>view</a>
-
+                        @endif
                         @can('update',$idea)
+                            @if(!(Route::is('idea.edit')))
                         <a href={{route('idea.edit',$idea['id'])}}>edit</a>
+                            @endif
                         <form method="post" action={{route('idea.destroy',$idea['id'])}}>
                             @csrf
                             @method('delete')
-                        <button>delete</button>
+                            <button>delete</button>
                         </form>
                         @endcan
 
@@ -26,8 +29,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @isset($editing)
-                    @if ($editing)
+                    @if(Route::is('idea.edit'))
                         <form action={{route('idea.update',$idea['id'])}} method="post">
                             @csrf
                             @method('put')
@@ -35,16 +37,15 @@
                             @error('cont')
                                 {{$message}}
                             @enderror
-                            <div class="">
-                                <button class="btn btn-dark"> update </button>
-                            </div>
+
+                            <button class="btn btn-dark"> update </button>
+
                         </form>
                     @else
                         <p class="fs-6 fw-light text-muted">
                             {{$idea['idea']}}
                         </p>
                     @endif
-                @endisset
                 <div class="d-flex justify-content-between">
                     <div>
                         @auth
@@ -64,12 +65,25 @@
                          {{$idea->likes()->count()}}
                         @endguest
                     </div>
+
+                    @if(!(Route::is(['idea.show','idea.edit'])))
+                        <div>
+                        <a href={{route('idea.show',$idea['id'])}}><button class="btn btn-primary"> comments </button></a>
+                        </div>
+                    @endif
+
                     <div>
                         <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
                           {{$idea->created_at->diffforhumans()}} </span>
                     </div>
                 </div>
-              @include('subsys.comment')
+                @if(Route::is(['idea.show','comment.edit']))
+                <hr>
+                @include('subsys.comment')
+
+                @endif
             </div>
         </div>
     </div>
+
+

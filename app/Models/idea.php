@@ -10,10 +10,13 @@ class Idea extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'idea'  ,'user_id'  ];
+        'idea'  ,'user_id'
+      ];
 
-        protected $withCount = [
-            'likes'  ];
+    protected $withCount = [
+        'likes'
+      ];
+
     public function comments(){
         return $this->hasMany(comment::class,'idea_id','id');
     }

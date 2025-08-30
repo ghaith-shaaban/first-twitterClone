@@ -15,16 +15,8 @@
                         <span>Feed</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span>Terms</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span>Support</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span>Settings</span></a>
+                    <a class="nav-link {{Route::is('notification')? 'text-white bg-primary rounded':''}}" href="{{route('notification')}}">
+                        <span>notification</span></a>
                 </li>
             </ul>
         </div>
