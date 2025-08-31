@@ -7,9 +7,11 @@ use App\Models\idea;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AdminController extends Controller
 {
+    use AuthorizesRequests;
   public function index(){
     $totalusers=User::count();
     $totalideas=idea::count();

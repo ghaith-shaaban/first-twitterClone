@@ -6,9 +6,12 @@ use App\Http\Requests\updateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    use AuthorizesRequests;
 
     public function show(User $user)
     {
@@ -48,7 +51,7 @@ class UserController extends Controller
 
     public function profile(){
 
-        return $this->show(auth()->user());
+        return $this->show(Auth::user());
     }
 
 

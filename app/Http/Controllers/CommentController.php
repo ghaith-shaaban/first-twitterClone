@@ -6,15 +6,18 @@ use App\Models\comment;
 use App\Models\idea;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    use AuthorizesRequests;
     public function store(idea $idea){
         // try{
             request()->validate(['comment'=>'required|min:2|max:240']);
             $comment=new comment();
             $comment->idea_id = $idea['id'];
-            $comment->user_id =auth()->id();
+            $comment->user_id =Auth::id();
             $comment->content=request()->get('comment');
             $comment->save();
 

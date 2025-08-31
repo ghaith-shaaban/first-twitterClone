@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createIdeaRequest;
 use App\Models\idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class IdeaController extends Controller
 {
-
+    use AuthorizesRequests;
+    
     public function create(createIdeaRequest $request){
 
         $validated= $request->validated();
 
         idea::create([
             'idea'=>$validated['idea'],
-            'user_id'=>auth()->id()
+            'user_id'=>Auth::id()
         ]);
 
        return redirect()->route('main')->with('success','Idea created successfully');

@@ -2,42 +2,35 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Gate;
 // use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Support\ServiceProvider;
 
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-      Paginator::useBootstrapFive();
+        Paginator::useBootstrapFive();
 
-    //   Debugbar::enable();
-
-      $topUsers= Cache::remember('topUsers',60*2,function(){
-        return User::withCount('ideas')->orderBy('ideas_count','DESC')->limit(5)->get();
-      });
-
-      View::share('topUsers',$topUsers);
+        Gate::define('admin',function(User $user):bool{
+            return $user['admin'];
+        });
     }
 }

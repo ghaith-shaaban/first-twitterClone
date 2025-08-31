@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\welcomeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\mail;
 
@@ -43,7 +44,7 @@ class AuthController extends Controller
               'password'=>'required|min:2'
             ]
         );
-        if(auth()->attempt($validated))
+        if(Auth::attempt($validated))
         {
             request()->session()->regenerate();
             return redirect()->route('main')->with('success','login successfully!');
@@ -53,7 +54,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        auth()->logout();
+        Auth::logout();
 
         request()->session()->invalidate();
         request()->session()->regenerateToken();
