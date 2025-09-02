@@ -5,10 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Idea extends Model
 {
-    use HasFactory;
+    use HasFactory,Searchable;
+
+    public function toSearchableArray(): array
+{
+    return [
+        'id' => $this->id,
+        'idea' => $this->idea,
+        'user_id' =>$this->user_id,
+    ];
+}
+
     protected $fillable = [
         'idea'  ,'user_id'
       ];
@@ -33,7 +44,8 @@ class Idea extends Model
         return $this->likes()->where('user_id',$user['id'])->exists();
     }
 
-    public function scopeSearch(Builder $query,$search=''){
-       $query ->where('idea','like','%'.$search.'%');
-    }
+    //old search
+    // public function scopeSearch(Builder $query,$search=''){
+    //    $query ->where('idea','like','%'.$search.'%');
+    // }
 }

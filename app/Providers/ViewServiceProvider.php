@@ -25,7 +25,7 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer('*', function ($view) {
             $topUsers = Cache::remember('topUsers', 60*2, function () {
-                return User::withCount('following')
+                return User::withCount('ideas')
                     ->orderByDesc('ideas_count')
                     ->limit(5)
                     ->get();

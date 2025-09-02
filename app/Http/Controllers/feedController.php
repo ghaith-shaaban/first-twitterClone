@@ -19,13 +19,18 @@ class FeedController extends Controller
     {
       $users_followed=Auth::user()->following()->pluck('user_id');
 
-        $ideas=idea::with('user:id,name,image','comments.user:id,name,image')->whereIn('user_id',$users_followed)->orderBy('created_at','DESC');
-        if(request()->has('search'))
+      if(request()->has('search'))
         {
-            $ideas=$ideas->search(request('search'));
+            $query=idea::search(request('search'))->whereIn('user_id',$users_followed);
+        }
+        else
+        {
+        $query=idea::with('user:id,name,image','comments.user:id,name,image')->whereIn('user_id',$users_followed)->orderBy('created_at','DESC');
         }
 
-        return view('main',['ideas'=>$ideas->paginate(5)]);
+        $ideas=$query->paginate(5);
+
+        return view('main',compact('ideas'));
 
     }
 }

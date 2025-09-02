@@ -26,14 +26,19 @@ class MainController extends Controller
 
     public function index(){
 
-        $ideas=idea::with('user:id,name,image','comments.user:id,name,image')->withCount('likes')->orderBy('created_at','DESC');
-
         if(request()->has('search'))
         {
-            $ideas=$ideas->search(request('search'));
+            $query=idea::search(request('search'));
+        }
+        else
+        {
+            $query=idea::with('user:id,name,image','comments.user:id,name,image')
+            ->withCount('likes')->orderBy('created_at','DESC');
         }
 
-        return view('main',['ideas'=>$ideas->paginate(5)]);
+        $ideas=$query->paginate(5);
+
+        return view('main',compact('ideas'));
 
     }
 

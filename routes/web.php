@@ -31,7 +31,9 @@ Route::get('/notification',NotificationController::class )->middleware('auth')->
 
 Route::get('/profile',[UserController::class,'profile'])->middleware('auth')->name('profile');
 
-Route::resource('/user',UserController::class)->only('show');
+// Route::resource('/user',UserController::class)->only('show');
+
+Route::get('/user/{user}',[UserController::class,'show'])->name('user.show');
 
 Route::resource('/user',UserController::class)->only('edit','update')->middleware('auth');
 

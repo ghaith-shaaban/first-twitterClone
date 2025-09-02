@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\updateUserRequest;
+use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,8 +16,22 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $ideas=$user->ideas()->paginate(5);
+
+        if(request()->has('search'))
+        {
+            $query=Idea::search(request('search'))->where('user_id',$user->id);
+        }
+        else
+        {
+            $query=idea::with('user:id,name,image','comments.user:id,name,image')
+            ->withCount('likes')->where('user_id',$user->id)->orderBy('created_at','DESC');
+        }
+
+
+        $ideas=$query->paginate(5);
+
         $editing=false;
+
         return view('user',compact('user','editing','ideas'));
     }
 

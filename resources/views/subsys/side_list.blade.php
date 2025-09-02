@@ -8,7 +8,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is('profile')? 'text-white bg-primary rounded':''}}" href="{{route('profile')}}">
-                        <span>profile</span></a>
+                        <span>My Profile</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is('feed')? 'text-white bg-primary rounded':''}}" href="{{route('feed')}}">
@@ -16,7 +16,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is('notification')? 'text-white bg-primary rounded':''}}" href="{{route('notification')}}">
-                        <span>notification</span></a>
+                        <span>Notification</span></a>
                 </li>
             </ul>
         </div>
