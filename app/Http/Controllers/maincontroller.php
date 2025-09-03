@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\idea;
+use App\Notifications\FollowingNotification;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
@@ -12,6 +13,8 @@ class MainController extends Controller
         $follower=Auth::user();
 
         $follower->following()->attach($user['id']);
+
+        $user->notify(new FollowingNotification($follower));
 
         return redirect()->route('user.show',$user['id'])->with('success','followed successfully!');
     }

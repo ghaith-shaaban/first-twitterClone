@@ -27,7 +27,9 @@ Route::post('/idea/{idea}/toggle-like',[MainController::class,'toggleLike'])->mi
 
 Route::get('/feed',FeedController::class )->middleware('auth')-> name('feed');
 
-Route::get('/notification',NotificationController::class )->middleware('auth')-> name('notification');
+Route::get('/notification',[NotificationController::class,'index'] )->middleware('auth')-> name('notification');
+
+Route::get('/notification/{id}',[NotificationController::class ,'MarkAsRead'])->middleware('auth')-> name('notification.MarkAsRead');
 
 Route::get('/profile',[UserController::class,'profile'])->middleware('auth')->name('profile');
 
